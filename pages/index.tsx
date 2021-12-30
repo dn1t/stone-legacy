@@ -2,9 +2,9 @@ import { PhotographIcon, UploadIcon } from '@heroicons/react/outline';
 import type { NextPage } from 'next';
 import { signOut, useSession } from 'next-auth/react';
 import { useRef, useState } from 'react';
-import PostList from '../components/PostList';
-import Sidebar from '../components/Sidebar';
-import UserWidget from '../components/UserWidget';
+import PostList from '../components/post-list';
+import Sidebar from '../components/sidebar';
+import UserWidget from '../components/user-widget';
 
 const Home: NextPage = () => {
   const [content, setContent] = useState('');

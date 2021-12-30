@@ -1,10 +1,10 @@
 import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Sidebar from '../components/Sidebar';
-import UserWidget from '../components/UserWidget';
+import Sidebar from '../components/sidebar';
+import UserWidget from '../components/user-widget';
 
-const Login = () => {
+const Join = () => {
   const router = useRouter();
   const { status } = useSession();
   const [error, setError] = useState<string>();
@@ -83,4 +83,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Join;
