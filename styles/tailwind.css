@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px rgb(243 244 246) inset !important;
+}
+
+label input:focus-within ~ div,
+label input:not(:placeholder-shown) ~ div {
+  @apply transform scale-75 translate-y-[-9px];
+}
+
+label input:focus-within ~ div {
+  @apply text-gray-600 transition-colors duration-300;
+}
