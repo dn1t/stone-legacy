@@ -1,11 +1,11 @@
-import { useSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Sidebar from '../components/sidebar';
 import UserWidget from '../components/user-widget';
-import JoinForm from '../components/join';
+import LoginForm from '../components/login';
 
-const Join = () => {
+const Login = () => {
   const router = useRouter();
   const { status } = useSession();
 
@@ -20,10 +20,10 @@ const Join = () => {
       <div className='flex h-screen border-l border-gray-100' />
       <div className='max-w-xl w-full'>
         <div className='mt-8 mb-1.5 px-4'>
-          <h1 className='font-semibold text-xl'>회원가입</h1>
+          <h1 className='font-semibold text-xl'>로그인</h1>
         </div>
         <div className='px-4 mt-4'>
-          <JoinForm />
+          <LoginForm />
         </div>
       </div>
       <div className='flex h-screen border-l border-gray-100' />
@@ -34,4 +34,4 @@ const Join = () => {
   );
 };
 
-export default Join;
+export default Login;

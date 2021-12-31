@@ -8,10 +8,11 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  name      String?
+  username  String   @unique
+  nickname  String   @unique
+  email     String
   password  String
+  image     String   @default("/default_profile.png")
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 }

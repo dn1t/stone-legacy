@@ -10,27 +10,29 @@ export default NextAuth({
     CredentialsProvider({
       name: 'credentials',
       credentials: {
-        email: { label: '이메일', type: 'email' },
+        username: { label: '아이디', type: 'text' },
         password: { label: '비밀번호', type: 'password' },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const user = await prisma.user.findUnique({
           where: {
-            email: String(credentials?.email),
+            username: String(credentials?.username),
           },
           select: {
-            name: true,
+            username: true,
+            nickname: true,
             email: true,
             password: true,
+            image: true,
           },
         });
 
-        if (!user) throw new Error('이메일 또는 비밀번호를 다시 확인해주세요.');
+        if (!user) throw new Error('아이디 또는 비밀번호를 다시 확인해주세요.');
 
         const isValid = await verifyPassword(credentials?.password, user.password);
 
-        if (!isValid) throw new Error('이메일 또는 비밀번호를 다시 확인해주세요.');
-        return { name: user.name, email: user.email };
+        if (!isValid) throw new Error('아이디 또는 비밀번호를 다시 확인해주세요.');
+        return { name: user.username, image: user.image };
       },
     }),
   ],
@@ -45,11 +47,13 @@ export default NextAuth({
   callbacks: {
     async jwt({ token, account }) {
       if (account) {
-        console.log(account);
         token.accessToken = account.access_token;
       }
-      console.log(token);
       return token;
+    },
+    async session({ session, user, token }) {
+      console.log(user);
+      return session;
     },
   },
 });

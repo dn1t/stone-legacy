@@ -11,7 +11,7 @@ const UserWidget = () => {
   let startY = 0;
 
   return (
-    <div className='flex flex-col h-max w-max'>
+    <div className='flex flex-col h-max w-max z-0'>
       <h2 className='font-semibold text-xl px-4 pb-1.5'>물수제비 전문가들</h2>
       <div className='px-1'>
         {users.map((user) => {
