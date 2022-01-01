@@ -19,3 +19,21 @@ model User {
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
 }
+
+model UserSummary {
+  username String @unique
+  nickname String @unique
+  image    String @unique
+  Post     Post[]
+}
+
+model Post {
+  id             Int         @id @default(autoincrement())
+  author         UserSummary @relation(fields: [authorUsername], references: [username])
+  authorUsername String
+  content        String
+  image          String
+  category       String
+  createdAt      DateTime    @default(now()) @map(name: "created_at")
+  updatedAt      DateTime    @updatedAt @map(name: "updated_at")
+}

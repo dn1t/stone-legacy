@@ -49,23 +49,23 @@ const Join = () => {
   return (
     <form className='flex flex-col' onSubmit={join}>
       <label className='block relative bg-gray-100 px-3.5 pt-5 pb-1.5 rounded-lg'>
-        <input type='text' className='block w-full appearance-none focus:outline-none bg-transparent' name='username' placeholder='' />
+        <input type='text' className='block w-full appearance-none focus:outline-none bg-transparent' name='username' placeholder=' ' />
         <div className='absolute top-3 origin-[0] transition-transform text-gray-400'>아이디</div>
       </label>
       <label className='block relative bg-gray-100 px-3.5 pt-5 pb-1.5 mt-2 rounded-lg'>
-        <input type='text' className='block w-full appearance-none focus:outline-none bg-transparent' name='nickname' placeholder='' />
+        <input type='text' className='block w-full appearance-none focus:outline-none bg-transparent' name='nickname' placeholder=' ' />
         <div className='absolute top-3 origin-[0] transition-transform text-gray-400'>이름</div>
       </label>
       <label className='block relative bg-gray-100 px-3.5 pt-5 pb-1.5 mt-2 rounded-lg'>
-        <input type='password' className='block w-full appearance-none focus:outline-none bg-transparent' name='password' placeholder='' />
+        <input type='password' className='block w-full appearance-none focus:outline-none bg-transparent' name='password' placeholder=' ' />
         <div className='absolute top-3 origin-[0] transition-transform text-gray-400'>비밀번호</div>
       </label>
       <label className='block relative bg-gray-100 px-3.5 pt-5 pb-1.5 mt-2 rounded-lg'>
-        <input type='password' className='block w-full appearance-none focus:outline-none bg-transparent' name='password_check' placeholder='' />
+        <input type='password' className='block w-full appearance-none focus:outline-none bg-transparent' name='password_check' placeholder=' ' />
         <div className='absolute top-3 origin-[0] transition-transform text-gray-400'>비밀번호 재입력</div>
       </label>
       <label className='block relative bg-gray-100 px-3.5 pt-5 pb-1.5 mt-2 rounded-lg'>
-        <input type='text' className='block w-full appearance-none focus:outline-none bg-transparent' name='email' placeholder='' />
+        <input type='text' className='block w-full appearance-none focus:outline-none bg-transparent' name='email' placeholder=' ' />
         <div className='absolute top-3 origin-[0] transition-transform text-gray-400'>이메일</div>
       </label>
       <div className={`text-red-500 text-sm mt-1 ${error === undefined ? 'h-0' : 'h-max'}`}>{error}</div>

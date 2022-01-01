@@ -12,10 +12,10 @@ const Home: NextPage = () => {
 
   return (
     <div className='max-w-xl w-full'>
-      <div className='mt-4 xs:mt-6 mb-1.5 px-6'>
-        <h1 className='font-semibold text-xl'>커뮤니티</h1>
+      <div className='px-6 py-5 sticky top-0 bg-white bg-opacity-70 backdrop-blur-lg z-10'>
+        <h1 className='font-semibold text-xl leading-none'>커뮤니티</h1>
       </div>
-      <form className='flex w-full cursor-text px-6 pb-5 mt-4 border-b border-gray-100' onClick={() => ref.current?.focus()}>
+      <form className='flex w-full cursor-text px-6 pb-5 border-b border-gray-100' onClick={() => ref.current?.focus()}>
         <div
           className='h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat flex-shrink-0 cursor-pointer'
           style={{ backgroundImage: `url('${session?.user?.image ?? '/default_profile.png'}')` }}

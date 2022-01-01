@@ -20,11 +20,11 @@ const App = ({ Component, pageProps }: AppProps) => {
           <link rel='icon' href='/favicon.ico' />
         </Head>
 
-        <div className='flex justify-center bg-white min-h-screen'>
+        <div className='flex items-stretch justify-center bg-white min-h-screen h-full'>
           <Sidebar />
-          <div className='hidden h-screen border-l ml-2 border-gray-100 xs:flex' />
+          <div className='hidden min-h-screen border-l ml-2 border-gray-100 xs:flex' />
           <Component {...pageProps} />
-          <div className='hidden h-screen border-l mr-2 border-gray-100 lg:flex' />
+          <div className='hidden min-h-screen border-l mr-2 border-gray-100 lg:flex' />
           <div className='hidden py-8 sticky top-0 h-screen lg:block'>
             <FriendRequestWidget />
             <button className='p-4 bg-pink-200' onClick={() => signOut()}>
