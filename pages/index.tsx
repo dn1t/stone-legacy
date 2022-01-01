@@ -55,7 +55,7 @@ const Home: NextPage = () => {
           </div>
         </div>
       </form>
-      <PostList />
+      <PostList category='main' />
     </div>
   );
 };
