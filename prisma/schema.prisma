@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id          Int         @id
+  id          Int         @id @default(autoincrement())
   username    String      @unique
   nickname    String      @unique
   email       String
@@ -23,14 +23,12 @@ model User {
   replies     Reply[]
   postLikes   PostLike[]
   replyLikes  ReplyLike[]
-  categories  Category[]
 }
 
 model Category {
-  id    Int    @id
+  id    Int    @id @default(autoincrement())
   name  String @unique
   posts Post[]
-  users User[]
 }
 
 model Post {
@@ -44,7 +42,7 @@ model Post {
   updatedAt      DateTime   @updatedAt @map(name: "updated_at")
   replies        Reply[]
   likes          PostLike[]
-  categoryName   String
+  categoryName   String     @default("main")
 }
 
 model Reply {
@@ -53,7 +51,6 @@ model Reply {
   authorUsername String
   content        String
   image          String
-  category       String
   createdAt      DateTime    @default(now()) @map(name: "created_at")
   updatedAt      DateTime    @updatedAt @map(name: "updated_at")
   parent         Post        @relation(fields: [postId], references: [id])

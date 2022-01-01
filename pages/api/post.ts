@@ -15,17 +15,23 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (Number.isNaN(display)) return res.status(400).json({ message: 'display 인자가 올바르지 않습니다.', error: true });
     if (Number.isNaN(offset)) return res.status(400).json({ message: 'offset 인자가 올바르지 않습니다.', error: true });
 
-    const posts = (await prisma.post.findMany({ where: { category }, include: { author: true }, skip: offset, take: display, orderBy: { id: 'desc' } })).map(
-      (post) => ({
-        id: post.id,
-        content: post.content,
-        image: post.image,
-        category: post.category,
-        createdAt: post.createdAt,
-        updatedAt: post.updatedAt,
-        author: { username: post.author.username, nickname: post.author.nickname, image: post.author.image },
+    const posts = (
+      await prisma.post.findMany({
+        where: { category: { name: category } },
+        include: { author: true, category: true },
+        skip: offset,
+        take: display,
+        orderBy: { id: 'desc' },
       })
-    );
+    ).map((post) => ({
+      id: post.id,
+      content: post.content,
+      image: post.image,
+      category: post.category.name,
+      createdAt: post.createdAt,
+      updatedAt: post.updatedAt,
+      author: { username: post.author.username, nickname: post.author.nickname, image: post.author.image },
+    }));
 
     res.json({ data: posts, error: false });
   } else if (req.method === 'POST') {
@@ -42,15 +48,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (category.length > 128) return res.status(400).json({ message: 'category 인자의 길이는 128자를 넘을 수 없습니다.', error: true });
 
     const createPostRes = await prisma.post.create({
-      data: { author: { connect: { username: session.user.name } }, category, content, image },
-      include: { author: true },
+      data: { author: { connect: { username: session.user.name } }, category: { connect: { name: category } }, content, image },
+      include: { author: true, category: true },
     });
 
     const data = {
       id: createPostRes.id,
       content: createPostRes.content,
       image: createPostRes.image,
-      category: createPostRes.category,
+      category: createPostRes.category.name,
       createdAt: createPostRes.createdAt,
       updatedAt: createPostRes.updatedAt,
       author: { username: createPostRes.author.username, nickname: createPostRes.author.nickname, image: createPostRes.author.image },
