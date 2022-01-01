@@ -1,14 +1,15 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { SessionProvider, signOut } from 'next-auth/react';
-import '@fontsource/plus-jakarta-sans';
-import 'pretendard/dist/web/variable/pretendardvariable.css';
-import '../styles/tailwind.css';
 import { RecoilRoot } from 'recoil';
 import PopupProvider from '../components/popup-provider';
 import Bottombar from '../components/bottombar';
 import Sidebar from '../components/sidebar';
 import FriendRequestWidget from '../components/friend-request-widget';
+import '@fontsource/plus-jakarta-sans';
+import 'pretendard/dist/web/variable/pretendardvariable.css';
+import '../styles/tailwind.css';
+import '../styles/loader.scss';
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
