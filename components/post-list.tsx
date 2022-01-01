@@ -27,6 +27,7 @@ const PostList = ({ category }: { category: string }) => {
   const router = useRouter();
   const [offset, setOffset] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [allLoaded, setAllLoaded] = useState(false);
   let startX = 0;
   let startY = 0;
 
@@ -96,6 +97,11 @@ const PostList = ({ category }: { category: string }) => {
       .then((res) => {
         const { data, error } = res;
         if (error) return;
+        if (data.length === 0) {
+          setLoading(false);
+          setAllLoaded(true);
+          return;
+        }
 
         setOffset(offset + 30);
         setPosts([...posts, ...data]);
@@ -110,6 +116,11 @@ const PostList = ({ category }: { category: string }) => {
       .then((res) => {
         const { data, error } = res;
         if (error) return;
+        if (data.length === 0) {
+          setLoading(false);
+          setAllLoaded(true);
+          return;
+        }
 
         setPosts(data);
         setLoading(false);
@@ -132,7 +143,7 @@ const PostList = ({ category }: { category: string }) => {
                 onScroll={(e) => {
                   const atBottom = e.scrollTop + e.clientHeight >= e.scrollHeight;
 
-                  if (atBottom) addPosts();
+                  if (atBottom && !allLoaded) addPosts();
                 }}
                 scrollTop={scrollTop}
                 rowCount={posts.length}
@@ -144,9 +155,11 @@ const PostList = ({ category }: { category: string }) => {
           </AutoSizer>
         )}
       </WindowScroller>
-      <div className=''>
-        <Loader active type='ball-beat' />
-      </div>
+      {loading && (
+        <div className='transform scale-75 mx-auto py-2'>
+          <Loader type='ball-beat' active />
+        </div>
+      )}
     </div>
   );
 
