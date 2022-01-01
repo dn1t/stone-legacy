@@ -8,26 +8,73 @@ datasource db {
 }
 
 model User {
-  username    String   @unique
-  nickname    String   @unique
+  id          Int         @id
+  username    String      @unique
+  nickname    String      @unique
   email       String
-  emailPublic Boolean  @default(false)
+  emailPublic Boolean     @default(false)
   bio         String?
   password    String
-  image       String   @default("/default_profile.png")
-  banner      String   @default("/default_banner.png")
-  createdAt   DateTime @default(now()) @map(name: "created_at")
-  updatedAt   DateTime @updatedAt @map(name: "updated_at")
-  Post        Post[]
+  image       String      @default("/default_profile.png")
+  banner      String      @default("/default_banner.png")
+  createdAt   DateTime    @default(now()) @map(name: "created_at")
+  updatedAt   DateTime    @updatedAt @map(name: "updated_at")
+  posts       Post[]
+  replies     Reply[]
+  postLikes   PostLike[]
+  replyLikes  ReplyLike[]
+  categories  Category[]
+}
+
+model Category {
+  id    Int    @id
+  name  String @unique
+  posts Post[]
+  users User[]
 }
 
 model Post {
-  id             Int      @id @default(autoincrement())
-  author         User     @relation(fields: [authorUsername], references: [username])
+  id             Int        @id @default(autoincrement())
+  author         User       @relation(fields: [authorUsername], references: [username])
+  authorUsername String
+  content        String
+  image          String
+  category       Category   @relation(fields: [categoryName], references: [name])
+  createdAt      DateTime   @default(now()) @map(name: "created_at")
+  updatedAt      DateTime   @updatedAt @map(name: "updated_at")
+  replies        Reply[]
+  likes          PostLike[]
+  categoryName   String
+}
+
+model Reply {
+  id             Int         @id @default(autoincrement())
+  author         User        @relation(fields: [authorUsername], references: [username])
   authorUsername String
   content        String
   image          String
   category       String
+  createdAt      DateTime    @default(now()) @map(name: "created_at")
+  updatedAt      DateTime    @updatedAt @map(name: "updated_at")
+  parent         Post        @relation(fields: [postId], references: [id])
+  postId         Int
+  likes          ReplyLike[]
+}
+
+model PostLike {
+  id             Int      @id @default(autoincrement())
+  author         User     @relation(fields: [authorUsername], references: [username])
+  authorUsername String
   createdAt      DateTime @default(now()) @map(name: "created_at")
-  updatedAt      DateTime @updatedAt @map(name: "updated_at")
+  parent         Post     @relation(fields: [postId], references: [id])
+  postId         Int
+}
+
+model ReplyLike {
+  id             Int      @id @default(autoincrement())
+  author         User     @relation(fields: [authorUsername], references: [username])
+  authorUsername String
+  createdAt      DateTime @default(now()) @map(name: "created_at")
+  parent         Reply    @relation(fields: [postId], references: [id])
+  postId         Int
 }

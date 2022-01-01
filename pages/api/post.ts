@@ -15,15 +15,17 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (Number.isNaN(display)) return res.status(400).json({ message: 'display 인자가 올바르지 않습니다.', error: true });
     if (Number.isNaN(offset)) return res.status(400).json({ message: 'offset 인자가 올바르지 않습니다.', error: true });
 
-    const posts = (await prisma.post.findMany({ where: { category }, include: { author: true } })).map((post) => ({
-      id: post.id,
-      content: post.content,
-      image: post.image,
-      category: post.category,
-      createdAt: post.createdAt,
-      updatedAt: post.updatedAt,
-      author: { username: post.author.username, nickname: post.author.nickname, image: post.author.image },
-    }));
+    const posts = (await prisma.post.findMany({ where: { category }, include: { author: true }, skip: offset, take: display, orderBy: { id: 'desc' } })).map(
+      (post) => ({
+        id: post.id,
+        content: post.content,
+        image: post.image,
+        category: post.category,
+        createdAt: post.createdAt,
+        updatedAt: post.updatedAt,
+        author: { username: post.author.username, nickname: post.author.nickname, image: post.author.image },
+      })
+    );
 
     res.json({ data: posts, error: false });
   } else if (req.method === 'POST') {
@@ -54,9 +56,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       author: { username: createPostRes.author.username, nickname: createPostRes.author.nickname, image: createPostRes.author.image },
     };
 
-    console.log(data);
-
-    res.json({ zz: 'zz' });
+    res.json({ data, error: false });
   } else return res.status(400).send('Bad Request');
 };
 

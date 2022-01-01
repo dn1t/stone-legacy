@@ -1,3 +1,4 @@
+import { HeartIcon } from '@heroicons/react/outline';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import usePostList from '../hooks/usePostList';
@@ -5,7 +6,7 @@ import usePostList from '../hooks/usePostList';
 const PostList = ({ category }: { category: string }) => {
   const router = useRouter();
   const [offset, setOffset] = useState(0);
-  const [postList, loading] = usePostList(category, 12, offset);
+  const [postList, loading] = usePostList(category, 24, offset);
   let startX = 0;
   let startY = 0;
 
@@ -46,6 +47,12 @@ const PostList = ({ category }: { category: string }) => {
                     {line}
                   </div>
                 ))}
+              </div>
+              <div className='flex items-center mt-1'>
+                <button className='flex items-center text-sm text-gray-500'>
+                  <HeartIcon className='h-4 w-4 mr-0.5' />
+                  123
+                </button>
               </div>
             </div>
           </div>

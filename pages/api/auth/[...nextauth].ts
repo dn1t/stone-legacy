@@ -51,8 +51,7 @@ export default NextAuth({
       }
       return token;
     },
-    async session({ session, user, token }) {
-      console.log(user);
+    async session({ session }) {
       return session;
     },
   },
