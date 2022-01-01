@@ -8,11 +8,14 @@ datasource db {
 }
 
 model User {
-  username  String   @unique
-  nickname  String   @unique
-  email     String
-  password  String
-  image     String   @default("/default_profile.png")
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  username    String   @unique
+  nickname    String   @unique
+  email       String
+  emailPublic Boolean  @default(false)
+  bio         String?
+  password    String
+  image       String   @default("/default_profile.png")
+  banner      String   @default("/default_banner.png")
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
 }

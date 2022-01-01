@@ -1,11 +1,8 @@
 import { PhotographIcon, UploadIcon } from '@heroicons/react/outline';
 import type { NextPage } from 'next';
-import { signOut, useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRef, useState } from 'react';
-import Bottombar from '../components/bottombar';
 import PostList from '../components/post-list';
-import Sidebar from '../components/sidebar';
-import UserWidget from '../components/user-widget';
 
 const Home: NextPage = () => {
   const [content, setContent] = useState('');
@@ -14,63 +11,51 @@ const Home: NextPage = () => {
   const ref = useRef<HTMLTextAreaElement>(null);
 
   return (
-    <div className='flex justify-center gap-x-2 bg-white min-h-screen'>
-      <Sidebar />
-      <div className='hidden h-screen border-l border-gray-100 xs:flex' />
-      <div className='max-w-xl w-full'>
-        <div className='mt-4 xs:mt-8 mb-1.5 px-4'>
-          <h1 className='font-semibold text-xl'>커뮤니티</h1>
-        </div>
-        <form className='flex w-full cursor-text px-4 pt-1.5 pb-5 border-b border-gray-100' onClick={() => ref.current?.focus()}>
-          <div
-            className='h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat flex-shrink-0 cursor-pointer'
-            style={{ backgroundImage: `url('${session?.user?.image ?? '/default_profile.png'}')` }}
-          />
-          <div className='w-full mt-1.5'>
-            <div className='w-full ml-3'>
-              {/* <div
+    <div className='max-w-xl w-full'>
+      <div className='mt-4 xs:mt-6 mb-1.5 px-6'>
+        <h1 className='font-semibold text-xl'>커뮤니티</h1>
+      </div>
+      <form className='flex w-full cursor-text px-6 pb-5 mt-4 border-b border-gray-100' onClick={() => ref.current?.focus()}>
+        <div
+          className='h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat flex-shrink-0 cursor-pointer'
+          style={{ backgroundImage: `url('${session?.user?.image ?? '/default_profile.png'}')` }}
+        />
+        <div className='w-full mt-1.5'>
+          <div className='w-full ml-3'>
+            {/* <div
                 className='w-full bg-transparent text-[19px] font-[450] z-10 relative max-h-96 focus:outline-none overflow-auto'
                 ref={ref}
                 onInput={(e) => setContent((e.target as HTMLDivElement).innerText ?? '')}
                 contentEditable
               /> */}
-              <textarea
-                className='w-full bg-transparent text-[19px] font-[450] focus:outline-none overflow-auto resize-none'
-                ref={ref}
-                onChange={(e) => setContent((e.target as HTMLTextAreaElement).value ?? '')}
-                placeholder='이번에는 어떤 어그로를 끌어볼까요?'
-              />
-              {/* {content === '' && (
+            <textarea
+              className='w-full bg-transparent text-[19px] font-[450] focus:outline-none overflow-auto resize-none'
+              ref={ref}
+              onChange={(e) => setContent((e.target as HTMLTextAreaElement).value ?? '')}
+              placeholder='이번에는 어떤 어그로를 끌어볼까요?'
+            />
+            {/* {content === '' && (
                 <div className='relative'>
                   <div className='absolute -top-7 text-[19px] font-[450] z-0 text-gray-500'>이번에는 어떤 어그로를 끌어볼까요?</div>
                 </div>
               )} */}
-            </div>
-            <div className='flex items-center mt-2 ml-1.5'>
-              <div className='flex items-center gap-x-0.5 h-full text-gray-500 mt-1'>
-                <button className='hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-300 p-1.5 rounded-full focus:outline-none'>
-                  <PhotographIcon className='h-[18px] w-[18px] stroke-0' />
-                </button>
-                <button className='hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-300 p-1.5 rounded-full focus:outline-none'>
-                  <UploadIcon className='h-[18px] w-[18px]' />
-                </button>
-              </div>
-              <button className='bg-gray-900 hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-300 text-white text-[15px] font-[550] ml-auto px-4 py-2.5 leading-none rounded-full focus:outline-none'>
-                돌 던지기
+          </div>
+          <div className='flex items-center mt-2 ml-1.5'>
+            <div className='flex items-center gap-x-0.5 h-full text-gray-500 mt-1'>
+              <button className='hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-300 p-1.5 rounded-full focus:outline-none'>
+                <PhotographIcon className='h-[18px] w-[18px] stroke-0' />
+              </button>
+              <button className='hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-300 p-1.5 rounded-full focus:outline-none'>
+                <UploadIcon className='h-[18px] w-[18px]' />
               </button>
             </div>
+            <button className='bg-gray-900 hover:bg-gray-700 focus:bg-gray-700 transition-colors duration-300 text-white text-[15px] font-[550] ml-auto px-4 py-2.5 leading-none rounded-full focus:outline-none'>
+              돌 던지기
+            </button>
           </div>
-        </form>
-        <PostList />
-      </div>
-      <div className='hidden h-screen border-l border-gray-100 lg:flex' />
-      <div className='hidden py-8 sticky top-0 h-screen lg:block'>
-        <UserWidget />
-        <button className='p-4 bg-pink-200' onClick={() => signOut()}>
-          로그아웃
-        </button>
-      </div>
-      <Bottombar />
+        </div>
+      </form>
+      <PostList />
     </div>
   );
 };

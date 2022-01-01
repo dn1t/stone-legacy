@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-const UserWidget = () => {
+const FriendRequestWidget = () => {
   const router = useRouter();
   const users = [
     { id: 'stone', nickname: 'stone', profileImage: 'https://thispersondoesnotexist.com/image', bio: '바보바보 커뮤니티, stone!' },
@@ -12,7 +12,7 @@ const UserWidget = () => {
 
   return (
     <div className='flex flex-col h-max w-max z-0'>
-      <h2 className='font-semibold text-xl px-4 pb-1.5'>물수제비 전문가들</h2>
+      <h2 className='font-semibold text-xl px-4 pb-1.5'>친구 요청</h2>
       <div className='px-1'>
         {users.map((user) => {
           return (
@@ -49,4 +49,4 @@ const UserWidget = () => {
   );
 };
 
-export default UserWidget;
+export default FriendRequestWidget;

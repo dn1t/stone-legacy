@@ -9,7 +9,7 @@ import { useSession } from 'next-auth/react';
 
 const Bottombar = () => {
   const router = useRouter();
-  const { status } = useSession();
+  const { data: session, status } = useSession();
   const setShowPopup = useSetRecoilState(ShowPopupAtom);
   const setPopupTitle = useSetRecoilState(PopupTitleAtom);
   const setPopupContent = useSetRecoilState(PopupContentAtom);
@@ -26,8 +26,8 @@ const Bottombar = () => {
           <div className={`w-full flex justify-center px-5 py-4 ${router.pathname.split('/')[1] === 'profile' ? 'text-gray-500' : 'text-gray-400'}`}>
             {router.pathname.split('/')[1] === 'profile' ? <SolidUserIcon className='h-6 w-6' /> : <UserIcon className='h-6 w-6' />}
           </div>
-        ) : status === 'authenticated' ? (
-          <Link href={`/profile/${''}`}>
+        ) : status === 'authenticated' && session?.user?.name !== undefined ? (
+          <Link href={`/profile/${session.user.name}`}>
             <a
               className={`w-full flex justify-center px-5 py-4 ${router.pathname.split('/')[1] === 'profile' ? 'text-gray-500' : 'text-gray-400'}`}
               title={'프로필'}
