@@ -18,7 +18,7 @@ const useUserInfo = (username: string | string[] | undefined): [UserInfo | undef
     if (username instanceof Array || username === undefined) return;
     (async () => {
       try {
-        const res = await fetch(`/api/userInfo?username=${username}`);
+        const res = await fetch(`/api/user?username=${username}`);
         const { data, error } = await res.json();
         if (error) return;
 

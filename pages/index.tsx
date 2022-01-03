@@ -17,11 +17,11 @@ const Home: NextPage = () => {
       </div>
       <form className='flex w-full cursor-text px-6 pb-5 border-b border-gray-100' onClick={() => ref.current?.focus()}>
         <div
-          className='h-12 w-12 rounded-full bg-cover bg-center bg-no-repeat flex-shrink-0 cursor-pointer'
+          className='h-10 w-10 rounded-full bg-cover bg-center bg-no-repeat flex-shrink-0 cursor-pointer'
           style={{ backgroundImage: `url('${session?.user?.image ?? '/default_profile.png'}')` }}
         />
         <div className='w-full mt-1.5'>
-          <div className='w-full ml-3'>
+          <div className='w-full ml-2.5'>
             {/* <div
                 className='w-full bg-transparent text-[19px] font-[450] z-10 relative max-h-96 focus:outline-none overflow-auto'
                 ref={ref}
@@ -40,7 +40,7 @@ const Home: NextPage = () => {
                 </div>
               )} */}
           </div>
-          <div className='flex items-center mt-2 ml-1.5'>
+          <div className='flex items-center mt-2 ml-1'>
             <div className='flex items-center gap-x-0.5 h-full text-gray-500 mt-1'>
               <button className='hover:bg-gray-100 focus:bg-gray-100 transition-colors duration-300 p-1.5 rounded-full focus:outline-none'>
                 <PhotographIcon className='h-[18px] w-[18px] stroke-0' />

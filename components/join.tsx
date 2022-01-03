@@ -28,7 +28,7 @@ const Join = () => {
     const passwordCheck = e.target.password_check.value;
     if (password !== passwordCheck) return setError('비밀번호가 일치하지 않습니다.');
 
-    const res = await fetch('/api/auth/join', {
+    const res = await fetch('/api/user', {
       method: 'POST',
       body: JSON.stringify({ username, nickname, email, password }),
       headers: { 'Content-Type': 'application/json' },

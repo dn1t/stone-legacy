@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client';
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { verifyPassword } from '../../../lib/auth';
-
-const prisma = new PrismaClient();
+import prisma from '../../../lib/prisma';
 
 export default NextAuth({
   providers: [
@@ -32,6 +30,7 @@ export default NextAuth({
         const isValid = await verifyPassword(credentials?.password, user.password);
 
         if (!isValid) throw new Error('아이디 또는 비밀번호를 다시 확인해주세요.');
+
         return { name: user.username, image: user.image };
       },
     }),

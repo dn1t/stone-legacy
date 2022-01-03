@@ -11,6 +11,10 @@ import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '../styles/tailwind.css';
 import '../styles/loader.scss';
 
+// global.console = ((console) => {
+//   return { ...console, warn: (...args) => (args[0].includes('Duplicate atom key') ? null : console.warn(...args)) };
+// })(global.console);
+
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <RecoilRoot>
@@ -20,7 +24,6 @@ const App = ({ Component, pageProps }: AppProps) => {
           <meta name='description' content='바보바보 커뮤니티' />
           <link rel='icon' href='/favicon.ico' />
         </Head>
-
         <div className='flex items-stretch justify-center bg-white min-h-screen h-full'>
           <Sidebar />
           <div className='hidden min-h-screen border-l ml-2 border-gray-100 xs:flex' />

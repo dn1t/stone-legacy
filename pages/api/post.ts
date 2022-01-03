@@ -1,10 +1,9 @@
-import { PrismaClient } from '@prisma/client';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
+import prisma from '../../lib/prisma';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === 'GET') {
-    const prisma = new PrismaClient();
     let { category, display, offset } = req.query as { category: string | string[]; display: string | string[] | number; offset: string | string[] | number };
     if (typeof category !== 'string') return res.status(400).json({ message: 'category 인자가 제공되지 않았습니다.', error: true });
     if (typeof display !== 'string') return res.status(400).json({ message: 'display 인자가 제공되지 않았습니다.', error: true });
@@ -35,7 +34,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.json({ data: posts, error: false });
   } else if (req.method === 'POST') {
-    const prisma = new PrismaClient();
     const session = await getSession({ req });
     if (!session || !session.user || !session.user.name) return res.status(401).json({ message: '인증되지 않았습니다.', error: true });
 
