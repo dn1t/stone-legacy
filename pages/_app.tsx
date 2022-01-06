@@ -11,10 +11,6 @@ import 'pretendard/dist/web/variable/pretendardvariable.css';
 import '../styles/tailwind.css';
 import '../styles/loader.scss';
 
-// global.console = ((console) => {
-//   return { ...console, warn: (...args) => (args[0].includes('Duplicate atom key') ? null : console.warn(...args)) };
-// })(global.console);
-
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <RecoilRoot>
@@ -44,3 +40,4 @@ const App = ({ Component, pageProps }: AppProps) => {
 };
 
 export default App;
+``;
