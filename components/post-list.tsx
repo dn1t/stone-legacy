@@ -1,4 +1,5 @@
-import { HeartIcon } from '@heroicons/react/outline';
+import { ChatIcon, HeartIcon } from '@heroicons/react/outline';
+import { PostLike, Reply } from '@prisma/client';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import Loader from 'react-loaders';
@@ -16,6 +17,8 @@ interface Post {
     nickname: string;
     image: string;
   };
+  likes: PostLike[];
+  replies: Reply[];
 }
 
 const cache = new CellMeasurerCache({
@@ -44,7 +47,7 @@ const PostList = ({ category }: { category: string }) => {
           return (
             <div style={style}>
               <div
-                className='flex w-full py-2'
+                className='flex w-full py-2.5'
                 onMouseDown={(e) => {
                   startX = e.pageX;
                   startY = e.pageY;
@@ -78,7 +81,11 @@ const PostList = ({ category }: { category: string }) => {
                   <div className='flex items-center mt-1'>
                     <button className='flex items-center text-sm text-gray-500'>
                       <HeartIcon className='h-4 w-4 mr-0.5' />
-                      123
+                      {post.likes.length}
+                    </button>
+                    <button className='flex items-center text-sm text-gray-500 ml-2'>
+                      <ChatIcon className='h-4 w-4 mr-0.5' />
+                      {post.replies.length}
                     </button>
                   </div>
                 </div>
@@ -128,7 +135,7 @@ const PostList = ({ category }: { category: string }) => {
   }, []);
 
   return (
-    <div className='flex flex-col cursor-pointer px-6 pb-2 mt-4'>
+    <div className='flex flex-col cursor-pointer px-6 pb-2 mt-3.5'>
       <WindowScroller>
         {({ height, isScrolling, scrollTop }) => (
           <AutoSizer disableHeight>

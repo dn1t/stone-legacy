@@ -17,7 +17,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     const posts = (
       await prisma.post.findMany({
         where: { category: { name: category } },
-        include: { author: true, category: true },
+        include: { author: true, category: true, likes: true, replies: true },
         skip: offset,
         take: display,
         orderBy: { id: 'desc' },
@@ -30,6 +30,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       createdAt: post.createdAt,
       updatedAt: post.updatedAt,
       author: { username: post.author.username, nickname: post.author.nickname, image: post.author.image },
+      likes: post.likes,
+      replies: post.replies,
     }));
 
     res.json({ data: posts, error: false });
